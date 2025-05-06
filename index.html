@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Telugu XYT - Trading Community</title>
-    <link rel="icon" type="image/x-icon" href="6107113555980568223.jpg">
+    <link rel="icon" href="6107113555980568223.jpg" type="image/jpg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         :root {
@@ -20,29 +20,64 @@
             --91club: #ff7675;
         }
         
+        /* Particle Animation */
+        .particles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            overflow: hidden;
+        }
+        
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 50%;
+            animation: floatParticle linear infinite;
+        }
+        
+        @keyframes floatParticle {
+            0% { transform: translateY(0) translateX(0); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateY(-100vh) translateX(100px); opacity: 0; }
+        }
+        
         /* Wave Animation */
+        .wave-bg {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 200%;
+            height: 150px;
+            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" fill="%236c5ce7" opacity=".25"/><path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" fill="%236c5ce7" opacity=".5"/><path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="%236c5ce7"/></svg>');
+            background-size: 50% 100%;
+            animation: wave 15s linear infinite;
+            z-index: -1;
+            opacity: 0.7;
+        }
+        
         @keyframes wave {
             0% { transform: translateX(0) translateZ(0) scaleY(1); }
             50% { transform: translateX(-25%) translateZ(0) scaleY(0.8); }
             100% { transform: translateX(-50%) translateZ(0) scaleY(1); }
         }
         
-        @keyframes float {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
-        
-        @keyframes gradientBG {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-        
+        /* Glow Animation */
         @keyframes textGlow {
             0% { text-shadow: 0 0 5px var(--primary), 0 0 10px var(--secondary); }
             50% { text-shadow: 0 0 15px var(--primary), 0 0 20px var(--accent); }
             100% { text-shadow: 0 0 5px var(--primary), 0 0 10px var(--secondary); }
+        }
+        
+        /* Border Animation */
+        @keyframes borderPulse {
+            0% { box-shadow: 0 0 0 0 rgba(108, 92, 231, 0.7); }
+            70% { box-shadow: 0 0 0 15px rgba(108, 92, 231, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(108, 92, 231, 0); }
         }
         
         * {
@@ -53,23 +88,11 @@
         
         body {
             font-family: 'Poppins', sans-serif;
-            background: var(--darker);
+            background: linear-gradient(135deg, var(--darker) 0%, var(--dark) 100%);
             color: var(--light);
             overflow-x: hidden;
             position: relative;
-        }
-        
-        .wave-bg {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 200%;
-            height: 100px;
-            background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" fill="%236c5ce7" opacity=".25"/><path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" fill="%236c5ce7" opacity=".5"/><path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="%236c5ce7"/></svg>');
-            background-size: 50% 100%;
-            animation: wave 15s linear infinite;
-            z-index: -1;
-            opacity: 0.7;
+            min-height: 100vh;
         }
         
         .container {
@@ -86,21 +109,23 @@
             align-items: center;
             padding: 1rem 0;
             margin-bottom: 3rem;
+            position: relative;
         }
         
         .logo {
             display: flex;
             align-items: center;
             gap: 1rem;
+            position: relative;
         }
         
         .logo img {
-            width: 50px;
-            height: 50px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             object-fit: cover;
             border: 2px solid var(--accent);
-            animation: float 4s ease-in-out infinite;
+            animation: borderPulse 2s infinite;
         }
         
         .logo-text {
@@ -110,19 +135,54 @@
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: textGlow 3s ease-in-out infinite;
+            position: relative;
+        }
+        
+        .logo-text::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(to right, var(--accent), var(--primary));
+            border-radius: 3px;
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.3s ease;
+        }
+        
+        .logo:hover .logo-text::after {
+            transform: scaleX(1);
+            transform-origin: left;
         }
         
         .hero {
             text-align: center;
             margin-bottom: 4rem;
+            position: relative;
         }
         
         .hero h1 {
             font-size: 3.5rem;
-            margin-bottom: 1rem;
+            margin-bottom: 1.5rem;
             background: linear-gradient(to right, #fff, var(--secondary));
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .hero h1::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50%;
+            height: 3px;
+            background: linear-gradient(to right, var(--accent), var(--primary));
+            border-radius: 3px;
         }
         
         .hero p {
@@ -142,19 +202,50 @@
         
         .card {
             background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(15px);
             border-radius: 15px;
             padding: 2rem;
             text-align: center;
             transition: all 0.3s ease;
             border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .card::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(
+                to bottom right,
+                rgba(255,255,255,0.1) 0%,
+                rgba(255,255,255,0) 50%,
+                rgba(255,255,255,0.1) 100%
+            );
+            transform: rotate(45deg);
+            transition: all 0.5s ease;
+            opacity: 0;
+        }
+        
+        .card:hover::before {
+            animation: shine 1.5s;
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%) rotate(45deg); opacity: 0; }
+            20% { opacity: 1; }
+            100% { transform: translateX(100%) rotate(45deg); opacity: 0; }
         }
         
         .card:hover {
-            transform: translateY(-10px);
+            transform: translateY(-10px) scale(1.02);
             box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid var(--primary);
         }
         
         .card-icon {
@@ -167,17 +258,43 @@
             border-radius: 50%;
             font-size: 2.5rem;
             color: white;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover .card-icon {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(108, 92, 231, 0.5);
         }
         
         .telegram { background: var(--telegram); }
         .instagram { background: var(--instagram); }
         .youtube { background: var(--youtube); }
-        .club91 { background: var(--91club); }
         
         .card h3 {
             font-size: 1.5rem;
             margin-bottom: 1rem;
             color: white;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .card h3::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 30px;
+            height: 2px;
+            background: var(--primary);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+        
+        .card:hover h3::after {
+            width: 50px;
+            background: var(--accent);
         }
         
         .card p {
@@ -196,6 +313,23 @@
             transition: all 0.3s ease;
             border: none;
             cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: all 0.5s ease;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
         }
         
         .btn-primary {
@@ -218,6 +352,11 @@
         .btn-outline:hover {
             background: white;
             color: var(--dark);
+            border-color: transparent;
+        }
+        
+        #referral {
+            scroll-margin-top: 100px;
         }
         
         .ref-section {
@@ -226,13 +365,41 @@
             padding: 2rem;
             margin-top: 4rem;
             text-align: center;
-            backdrop-filter: blur(10px);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .ref-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at center, rgba(108, 92, 231, 0.1) 0%, transparent 70%);
+            z-index: -1;
         }
         
         .ref-section h2 {
             margin-bottom: 1.5rem;
             font-size: 2rem;
             color: white;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .ref-section h2::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50px;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 3px;
         }
         
         .ref-content {
@@ -249,24 +416,49 @@
             padding: 1.5rem;
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 1.5rem;
             transition: all 0.3s ease;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            max-width: 400px;
+            width: 100%;
+            backdrop-filter: blur(5px);
         }
         
         .ref-card:hover {
-            transform: scale(1.05);
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+            border-color: var(--primary);
         }
         
         .ref-card img {
-            width: 60px;
-            height: 60px;
+            width: 80px;
+            height: 80px;
             border-radius: 10px;
             object-fit: cover;
+            border: 2px solid rgba(255,255,255,0.2);
+            transition: all 0.3s ease;
+        }
+        
+        .ref-card:hover img {
+            transform: rotate(5deg) scale(1.05);
+            border-color: var(--accent);
+        }
+        
+        .ref-info {
+            text-align: left;
+            flex: 1;
         }
         
         .ref-info h4 {
             margin-bottom: 0.5rem;
             color: white;
+            font-size: 1.2rem;
+        }
+        
+        .ref-info p {
+            color: rgba(255,255,255,0.7);
+            font-size: 0.9rem;
+            margin-bottom: 1rem;
         }
         
         .footer {
@@ -275,6 +467,18 @@
             padding-top: 2rem;
             border-top: 1px solid rgba(255, 255, 255, 0.1);
             color: rgba(255,255,255,0.6);
+            position: relative;
+        }
+        
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 50%;
+            height: 1px;
+            background: linear-gradient(to right, transparent, var(--primary), transparent);
         }
         
         .social-links {
@@ -288,11 +492,51 @@
             color: white;
             font-size: 1.5rem;
             transition: all 0.3s ease;
+            width: 45px;
+            height: 45px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
         }
         
         .social-links a:hover {
+            transform: translateY(-5px) scale(1.1);
+            color: white;
+            background: var(--primary);
+            box-shadow: 0 5px 15px rgba(108, 92, 231, 0.4);
+        }
+        
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            cursor: pointer;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s ease;
+            z-index: 100;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        .scroll-top.active {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .scroll-top:hover {
+            background: var(--accent);
             transform: translateY(-5px);
-            color: var(--accent);
         }
         
         @media (max-width: 768px) {
@@ -305,12 +549,49 @@
             }
             
             .wave-bg {
-                height: 60px;
+                height: 100px;
+            }
+            
+            .logo-text {
+                font-size: 2rem;
+            }
+            
+            .logo img {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .ref-card {
+                flex-direction: column;
+                text-align: center;
+            }
+            
+            .ref-info {
+                text-align: center;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .card {
+                padding: 1.5rem;
+            }
+            
+            .ref-section {
+                padding: 1.5rem;
+            }
+            
+            .container {
+                padding: 1.5rem;
             }
         }
     </style>
 </head>
 <body>
+    <div class="particles" id="particles"></div>
     <div class="wave-bg"></div>
     
     <div class="container">
@@ -324,7 +605,7 @@
         <section class="hero">
             <h1>Welcome to Telugu XYT</h1>
             <p>Where we turn trading tricks into smart earnings with daily predictions, tools, and strategies designed for everyone, especially the Telugu community.</p>
-            <a href="#channels" class="btn btn-primary">Explore Our Channels</a>
+            <a href="#referral" class="btn btn-primary">View Referral Links</a>
         </section>
         
         <section id="channels">
@@ -350,16 +631,6 @@
                     <a href="https://t.me/+mGpNyd66RbMxMzc1" target="_blank" class="btn btn-outline">Join Now</a>
                 </div>
                 
-                <!-- Telegram Hacks Channel -->
-                <div class="card">
-                    <div class="card-icon telegram">
-                        <i class="fab fa-telegram"></i>
-                    </div>
-                    <h3>Hacks Channel</h3>
-                    <p>Exclusive trading hacks and shortcuts to improve your strategies</p>
-                    <a href="https://t.me/+mGpNyd66RbMxMzc1" target="_blank" class="btn btn-outline">Join Now</a>
-                </div>
-                
                 <!-- Instagram -->
                 <div class="card">
                     <div class="card-icon instagram">
@@ -382,13 +653,14 @@
             </div>
         </section>
         
-        <section class="ref-section">
+        <section id="referral" class="ref-section">
             <h2>Exclusive Referral Links</h2>
             <div class="ref-content">
                 <div class="ref-card">
                     <img src="https://91clubb.com/wp-content/uploads/2025/04/91-Club.webp" alt="91 Club">
                     <div class="ref-info">
                         <h4>91 Club App</h4>
+                        <p>Join using our referral code for exclusive benefits</p>
                         <a href="https://www.91appo.com/#/register?invitationCode=53818608697" target="_blank" class="btn btn-primary">Register Now</a>
                     </div>
                 </div>
@@ -404,5 +676,76 @@
             <p>&copy; 2023 Telugu XYT. All rights reserved.</p>
         </footer>
     </div>
+    
+    <div class="scroll-top" id="scrollTop">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+
+    <script>
+        // Create particles
+        const particlesContainer = document.getElementById('particles');
+        const particleCount = 30;
+        
+        for (let i = 0; i < particleCount; i++) {
+            const particle = document.createElement('div');
+            particle.classList.add('particle');
+            
+            // Random position
+            particle.style.left = `${Math.random() * 100}%`;
+            particle.style.top = `${Math.random() * 100}%`;
+            
+            // Random size
+            const size = Math.random() * 4 + 2;
+            particle.style.width = `${size}px`;
+            particle.style.height = `${size}px`;
+            
+            // Random opacity
+            particle.style.opacity = Math.random() * 0.5 + 0.1;
+            
+            // Random animation duration
+            const duration = Math.random() * 20 + 10;
+            particle.style.animation = `floatParticle ${duration}s linear infinite`;
+            
+            // Random delay
+            particle.style.animationDelay = `${Math.random() * 10}s`;
+            
+            particlesContainer.appendChild(particle);
+        }
+        
+        // Scroll to top button
+        const scrollTopBtn = document.getElementById('scrollTop');
+        
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 300) {
+                scrollTopBtn.classList.add('active');
+            } else {
+                scrollTopBtn.classList.remove('active');
+            }
+        });
+        
+        scrollTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+        
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
